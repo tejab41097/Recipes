@@ -1,0 +1,101 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion rootProject.compile_sdk_version
+    buildToolsVersion rootProject.build_tools_version
+
+    defaultConfig {
+        applicationId "com.tejas.recipe"
+        minSdkVersion rootProject.min_sdk_version
+        targetSdkVersion rootProject.target_sdk_version
+        versionCode rootProject.version_code
+        versionName rootProject.version_name
+
+        buildConfigField "String", "SERVER_URL", SERVER_URL
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        packagingOptions {
+            exclude 'LICENSE.txt'
+        }
+        lintOptions {
+            abortOnError false
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rootProject.rx_kotlin"
+    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.rx_android"
+
+    implementation "androidx.appcompat:appcompat:$rootProject.app_compact"
+    implementation "androidx.core:core-ktx:$rootProject.core_ktx"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_layout"
+    implementation "androidx.work:work-runtime-ktx:$rootProject.work"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.arch_lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.arch_lifecycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycle_commonJava8"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.legacy_support"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recycler_view"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"
+    implementation "androidx.cardview:cardview:$rootProject.card_view"
+
+    implementation "com.google.android.material:material:$rootProject.material"
+    implementation "com.google.dagger:dagger:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp3"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3"
+
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$rootProject.kotlin_version"
+
+    testImplementation "junit:junit:4.13.1"
+    debugImplementation 'androidx.test.ext:junit:1.1.2'
+    debugImplementation 'com.android.support:support-annotations:28.0.0'
+    debugImplementation 'com.android.support.test:runner:1.0.2'
+    debugImplementation 'com.android.support.test:rules:1.0.2'
+    debugImplementation('com.android.support.test.espresso:espresso-core:3.3.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    debugImplementation 'com.android.support.test.espresso:espresso-intents:3.3.0'
+    debugImplementation 'com.android.support.test.espresso:espresso-web:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    debugImplementation "androidx.arch.core:core-testing:2.1.0"
+    debugImplementation('androidx.fragment:fragment-testing:1.2.5') {
+        exclude group: 'androidx.test', module: 'core'
+    }
+}
